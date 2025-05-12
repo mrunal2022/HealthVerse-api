@@ -44,7 +44,7 @@ export class BlogService {
     const response = await fetch(`https://api.spoonacular.com/recipes/complexSearch?${queryParams.toString()}`);
 
     if (!response.ok) {
-      throw new Error('Failed to fetch recipes');
+      throw new Error('Failed to fetch recipes.');
     }
     return response.json();
   }
