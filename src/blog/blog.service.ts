@@ -16,8 +16,11 @@ export class BlogService {
     this.apiKey = this.configService.get<string>('SPOONACULAR_API_KEY') || "";
   }
 
-  async getBlogs(): Promise<BlogDetails[]> {
-    return this.blogDetailsModel.find().exec();
+  async getBlogs(categoryId: any, cursor?: any): Promise<BlogDetails[]> {
+    if (categoryId === '1') {
+      return this.blogDetailsModel.find( cursor ? { id: { $gt: cursor } } : {}).sort({ id: 1 }).limit(10);//send only 10 blogs if categoryId is 1
+    }
+    return this.blogDetailsModel.find( cursor ? { categoryId, id: { $gt: cursor } } : { categoryId }).sort({ id: 1 }).limit(10); //send only 10 blogs as per categoryId
   }
 
   async getRecipes(recipeParams: IRecipeParams): Promise<any> {

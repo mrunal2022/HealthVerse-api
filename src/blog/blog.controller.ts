@@ -6,7 +6,7 @@ import { IRecipeParams } from './blog.interface';
 @Controller()
 export class BlogController {
 
-    constructor(private blogService :BlogService){}
+    constructor(private blogService: BlogService) { }
 
     @Get('/getBlogs')
     @Header('Content-Type', 'application/json')
@@ -14,9 +14,9 @@ export class BlogController {
     @ApiResponse({ status: 200, description: 'Data Fetched Successfully' })
     @ApiResponse({ status: 400, description: 'Bad Request' })
     @ApiResponse({ status: 401, description: 'Unauthorized' })
-    async getBlogs(): Promise<any> {
+    async getBlogs(@Query('categoryId') categoryId: any, @Query('cursor') cursor: any): Promise<any> {
         try {
-            return await this.blogService.getBlogs();
+            return await this.blogService.getBlogs(categoryId, cursor);
         } catch (error) {
             throw new BadRequestException(error.detail);
         }
