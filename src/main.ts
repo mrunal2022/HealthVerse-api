@@ -6,7 +6,7 @@ async function bootstrap() {
   const app = await NestFactory.create(AppModule);
   const cors = require('cors');
   const corsOptions = {
-    origin: ['http://localhost:5173'],
+    origin: ['http://localhost:5173','https://healthverse-ui.onrender.com'],
     credentials: true,
     optionSuccessStatus: 200,
   };
